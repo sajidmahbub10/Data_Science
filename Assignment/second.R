@@ -5,7 +5,7 @@ print(missing)
 data$Assault <- ifelse(is.na(data$Assault),mean(data$Assault,na.rm =TRUE), data$Assault) 
 
 
-outMurder <-  data[(data$Murder > 20 |  data$Murder < 1),]
+outMurder <-  data[(data$Murder > 20 |  data$Murder < 3),]
 outMurder
 
 outAssault <-  data[(data$Assault >400 |  data$Assault < 45),]
@@ -47,6 +47,13 @@ class(data)
 
 data$Type <- factor(data$Type, ordered = TRUE, 
                     levels =c("Small","Medium","Large","Extra-Large"))
+
+#discretization
+
+data$Type <- factor(data$Type, 
+                    levels =c("Small","Medium","Large","Extra-Large"),labels=c(1,2,3,4))
+
+
 levels(data$Type)
 
  data$Murder <- round (data$Murder)
